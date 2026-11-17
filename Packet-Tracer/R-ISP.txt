@@ -1,0 +1,14 @@
+
+
+! R-ISP - SCHRODEX TECHNOLOGIES
+
+
+! Connection to HQ Router
+interface GigabitEthernet0/0
+ ip address 203.0.113.2 255.255.255.252
+
+! External Network Connection
+interface GigabitEthernet0/2
+ ip address 198.51.100.1 255.255.255.0
+
+!
