@@ -1,0 +1,63 @@
+
+! ==========================================
+! Schrodex Technologies
+! Device: SW-HQ1
+! Role: HQ Distribution Switch
+! ==========================================
+
+spanning-tree mode pvst
+spanning-tree extend system-id
+
+! EtherChannel - LACP
+interface Port-channel1
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,50,99,999
+ switchport mode trunk
+
+! Router Uplink
+interface FastEthernet0/1
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,50,99,999
+ switchport mode trunk
+
+! HQ Access Ports
+interface FastEthernet0/2
+ switchport access vlan 10
+ switchport mode access
+ spanning-tree portfast
+
+interface FastEthernet0/3
+ switchport access vlan 20
+ switchport mode access
+ spanning-tree portfast
+
+! Server Connections - VLAN 50
+interface FastEthernet0/4
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+
+interface FastEthernet0/5
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+
+interface FastEthernet0/6
+ switchport access vlan 50
+ switchport mode access
+ spanning-tree portfast
+
+! EtherChannel Member Links
+interface GigabitEthernet0/1
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,50,99,999
+ switchport mode trunk
+ duplex full
+ channel-group 1 mode active
+
+interface GigabitEthernet0/2
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,50,99,999
+ switchport mode trunk
+ duplex full
+ channel-group 1 mode active
