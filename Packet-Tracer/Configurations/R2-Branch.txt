@@ -1,0 +1,47 @@
+
+
+! R2-BRANCH - SCHRODEX TECHNOLOGIES
+
+! Branch Management VLAN
+interface GigabitEthernet0/1.99
+ encapsulation dot1Q 99
+ ip address 192.168.199.1 255.255.255.0
+
+! Branch Sales VLAN
+interface GigabitEthernet0/1.110
+ encapsulation dot1Q 110
+ ip address 192.168.110.1 255.255.255.0
+ ip helper-address 192.168.50.10
+
+! Branch HR VLAN
+interface GigabitEthernet0/1.120
+ encapsulation dot1Q 120
+ ip address 192.168.120.1 255.255.255.0
+ ip helper-address 192.168.50.10
+
+! Branch IT VLAN
+interface GigabitEthernet0/1.130
+ encapsulation dot1Q 130
+ ip address 192.168.130.1 255.255.255.0
+ ip helper-address 192.168.50.10
+
+! Native VLAN
+interface GigabitEthernet0/1.999
+ encapsulation dot1Q 999 native
+ no ip address
+
+! WAN Connection to HQ
+interface GigabitEthernet0/2
+ ip address 10.0.0.2 255.255.255.252
+
+! OSPF Routing
+router ospf 1
+ router-id 2.2.2.2
+ log-adjacency-changes
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.110.0 0.0.0.255 area 0
+ network 192.168.120.0 0.0.0.255 area 0
+ network 192.168.130.0 0.0.0.255 area 0
+ network 192.168.199.0 0.0.0.255 area 0
+
+!
